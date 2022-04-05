@@ -32,15 +32,14 @@ function getGrill(selettore, n_celle, tag, tag_classe1, tag_classe2) {
             //console.log(cell)
 
         //aggiungo i numeri da 1 a N (i) nei nodi della DOM
-        cell.innerHTML += i
+        cell.innerHTML = i
             //console.log(i); - Numeri
             //console.log(cell);
 
         cells.append(cell)
             //console.log(cells)
 
-        const numeriDOM = i;
-        console.log(numeriDOM);
+
     }
 
 }
@@ -82,7 +81,6 @@ function getArrayNumbers() {
 
 //LIVELLI DI GIOCO
 document.getElementById('btn_play').addEventListener('click', generaGioco_facile);
-
 /**
  * ho invocato diverse funzioni al click dei diversi livelli di gioco
  * @param {string} event // per non far refresciare la pagina
@@ -125,7 +123,7 @@ function generaGioco_facile(event) {
 
     //Array con i 16 numeri
     const verificaNB = getArrayNumbers()
-        //console.log(verificaNB);
+        //console.log(verificaNB); - Array
 
     for (let i = 0; i < allCell.length; i++) {
         //seleziono i singoli nodi della DOM
@@ -139,15 +137,21 @@ function generaGioco_facile(event) {
             //console.log(this, i);
             let verifica = true
                 //this.classList.add('color')
+                //console.log(numeriDOM);
 
-
-            if (numeriDOM === verificaNB) {
+            //verifica al click se il numero che hai cliccatto non fa parte dell'array 
+            if (!verificaNB.includes(parseInt(this.innerHTML))) {
                 this.classList.add('color')
             } else {
                 this.classList.add('color_red')
                 verifica = false
+                alert('HAI PERSO, hai preso una bomba')
+
+
             }
+
         })
+
 
     }
 }
