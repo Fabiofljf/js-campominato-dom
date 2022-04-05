@@ -6,7 +6,7 @@ Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
 */
 
 
-//PRIMO PASSO - creare una griglia.
+//PRIMO PASSO - creare una griglia - FUNZIONE.
 /**
  * generato nodi della DOM + assegnato classi ai nodi della DOM + aggiunto i numeri dentro i nodi della DOM - funzione.
  * @param {string} selettore // la classe a cui vogliamo aggiunge i nodi della DOM (celle)
@@ -39,6 +39,41 @@ function getGrill(selettore, n_celle, tag, tag_classe1, tag_classe2) {
 
 }
 
+
+
+/*
+SECONDO PASSO - Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta. I numeri nella lista delle bombe non possono essere duplicati.
+*/
+
+//Genero numeri casuali - FUNZIONE.
+function getRandomNumbers(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+//verifico se la mia funzione è valida;
+//console.log(getRandomNumbers(1, 100));
+
+//Arrey con i numeri casuali unici che ho creato con getRandomNumbers - FUNZIONE.
+function getArrayNumbers() {
+    const arrayRN = [];
+    //console.log(arrayRN);
+    //applico while loop per generare 16 numeri casuali unici;
+    while (arrayRN.length !== 16) {
+        //variabile che genera i singoli 16 numeri da 1 a 100;
+        const nRandom = getRandomNumbers(1, 100)
+            //console.log(nRandom);
+            //se non c'è il numero, lo aggiunge alla mia array;
+        if (!arrayRN.includes(nRandom)) {
+            arrayRN.push(nRandom)
+        }
+    }
+    //console.log(arrayRN.length);
+    return arrayRN;
+}
+//verifico se la mia funzione è valida;
+//console.log(getArrayNumbers());
+
+
+
 //LIVELLI DI GIOCO
 document.getElementById('btn_play').addEventListener('click', generaGioco_facile);
 
@@ -66,8 +101,13 @@ function generaGioco_facile(event) {
         getGrill('.cella_padre', 49, 'div', 'cella_singola', 'misura_sm')
     }
 
-    //SECONDO PASSO - colorare le celle della griglia.
+    /*
+    TERZO PASSO - In seguito l'utente clicca su una cella:
+    - se il numero è presente nella lista dei numeri generati --> abbiamo calpestato una bomba, la cella si colora di rosso e la partita termina.
+    - altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+    */
 
+    //Colorare le celle della griglia.
     /*
         1. Selezionare tutti i nodi della DOM (tutte le celle)
         2. Al click, evidenziare solo la cella di riferimento con THIS e cambiare colore
@@ -75,16 +115,31 @@ function generaGioco_facile(event) {
     //Seleziono tutti i singoli nodi della DOM
     const allCell = document.querySelectorAll('.cella_singola')
         //console.log(allCell);
+        //console.log(getArrayNumbers())
+    const verificaNB = getArrayNumbers()
+    console.log(verificaNB);
     for (let i = 0; i < allCell.length; i++) {
         //seleziono i singoli nodi della DOM
         const singleCell = allCell[i];
         //console.log(singleCell);
-
         //Applico la classe che al click cambia colore
         singleCell.addEventListener('click', function() {
             //console.log(this, i);
-            this.classList.add('color')
+            let verifica = true
+                //this.classList.add('color')
+
+            if (i === verificaNB) {
+                this.classList.add('color')
+            } else {
+                this.classList.add('color_red')
+                verifica = false
+            }
         })
 
     }
 }
+
+
+
+
+//Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba.
