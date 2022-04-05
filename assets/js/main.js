@@ -26,15 +26,21 @@ function getGrill(selettore, n_celle, tag, tag_classe1, tag_classe2) {
         //console.log(n_celle);
         const cell = document.createElement(tag)
             //console.log(cell);
-            //aggiungo la classe alle celle
+
+        //aggiungo la classe alle celle
         cell.classList.add(tag_classe1, tag_classe2)
             //console.log(cell)
-            //aggiungo i numeri da 1 a N (i) nei nodi della DOM
+
+        //aggiungo i numeri da 1 a N (i) nei nodi della DOM
         cell.innerHTML += i
+            //console.log(i); - Numeri
             //console.log(cell);
+
         cells.append(cell)
             //console.log(cells)
 
+        const numeriDOM = i;
+        console.log(numeriDOM);
     }
 
 }
@@ -116,19 +122,26 @@ function generaGioco_facile(event) {
     const allCell = document.querySelectorAll('.cella_singola')
         //console.log(allCell);
         //console.log(getArrayNumbers())
+
+    //Array con i 16 numeri
     const verificaNB = getArrayNumbers()
-    console.log(verificaNB);
+        //console.log(verificaNB);
+
     for (let i = 0; i < allCell.length; i++) {
         //seleziono i singoli nodi della DOM
         const singleCell = allCell[i];
-        //console.log(singleCell);
+        //console.log(singleCell); - Intera cella
+        //console.log(allCell[i]); - Intera cella
+        //console.log(i);  - Posizione [0]
+
         //Applico la classe che al click cambia colore
         singleCell.addEventListener('click', function() {
             //console.log(this, i);
             let verifica = true
                 //this.classList.add('color')
 
-            if (i === verificaNB) {
+
+            if (numeriDOM === verificaNB) {
                 this.classList.add('color')
             } else {
                 this.classList.add('color_red')
