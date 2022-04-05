@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/* UTILITY */
+
+.h_50 {
+    height: 50px;
+}
+
+.h_100 {
+    height: 100px;
+}
+
+
+/* HEADER */
+
+
+/* MAIN */
+
+.h_special {
+    height: calc(100vh - 150px)
+}
+
+.bg_main {
+    background-color: #7FFFD4;
+}
+
+.cella_padre {
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+}
+
+.cella_singola {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    border: 1px solid black;
+    background-color: #7FFFD4;
+}
+
+.misura_lg {
+    width: calc(100% / 10);
+}
+
+.misura_md {
+    width: calc(100% / 9);
+}
+
+.misura_sm {
+    width: calc(100% / 7);
+}
+
+.color {
+    background-color: #6495ED;
+}
+
+
+/* FOOTER */
